@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PerrosDelMundo.Models.Razas>
+@{
+    Layout = "_Layout";
+}
+
+<h1 class="admin">Administrar Razas</h1>
+
+<a class="admin">Lista de las razas</a>
+
+<table>
+    <caption>
+        <a href="~/Admin/Home/AgregarRaza"> Agregar Raza</a>
+    </caption>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>@item.Nombre</td>
+                <td class="modificaciones">
+                    <a href="~/Admin/Home/EditarRaza/@item.Id">Editar</a>
+                    <a href="~/Admin/Home/EliminarRaza/@item.Id">Eliminar</a>
+                   
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

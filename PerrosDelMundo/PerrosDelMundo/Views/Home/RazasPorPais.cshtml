@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PerrosDelMundo.Models.ViewModels.PaisesViewModel>
+@{
+    Layout = "_Layout";
+}
+
+<section class="nav">
+    <h3>Razas por país</h3>
+    <nav>
+        <a href="~/Home/Index">Listado Alfabético de Razas</a>
+    </nav>
+</section>
+
+<section class="list">
+    @foreach (var paises in Model)
+    {
+        <h4>@paises.NombrePais</h4>
+        @foreach (var r in paises.Razas)
+        {
+            <ul>
+                <li>
+                    <a href="/Raza/@r.Nombre.Replace(" ", "-")">
+                        <img src="~/imgs_perros/@(r.Id)_0.jpg" />
+                        @r.Nombre
+                    </a>
+                </li>
+            </ul>
+        }
+    }
+</section>

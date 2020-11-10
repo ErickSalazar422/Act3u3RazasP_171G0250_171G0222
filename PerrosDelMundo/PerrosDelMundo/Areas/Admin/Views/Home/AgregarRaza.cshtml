@@ -1,0 +1,116 @@
+﻿@model PerrosDelMundo.Models.RazaViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+}
+<h1>Agregar raza de perro</h1>
+
+<form method="post" asp-action="AgregarRaza" asp-controller="Home" asp-area="Admin" enctype="multipart/form-data">
+    <h3>Información de la raza</h3>
+    <label>Id </label>
+    <input required asp-for="Razas.Id" />
+    <label>Nombre </label>
+    <br />
+    <input required asp-for="Razas.Nombre" />
+    <br />
+    <label>Descripción </label>
+    <br />
+    <textarea required="required" asp-for="Razas.Descripcion"></textarea>
+    <br />
+    <label>Otro(s) nombre </label>
+    <br />
+    <input required asp-for="Razas.OtrosNombres" />
+    <br />
+    <label>Peso minimo </label>
+    <br />
+    <input type="number" step="0.1" asp-for="Razas.PesoMin" />
+    <br />
+    <label>Peso máximo</label>
+    <br />
+    <input type="number" step="0.1" asp-for="Razas.PesoMax" />
+    <br />
+    <label>Altura minima </label>
+    <br />
+    <input type="number" step="0.1" required asp-for="Razas.AlturaMin" />
+    <br />
+    <label>Altura maxima </label>
+    <br />
+    <input type="number" step="0.1" required asp-for="Razas.AlturaMax" />
+    <br />
+    <label>Esperanza de vida </label>
+    <br />
+    <input step="1" required asp-for="Razas.EsperanzaVida" />
+    <br /> 
+    <p>Pais de la raza</p>
+    <select asp-for="Razas.IdPais" asp-items="@(new SelectList(Model.Paises, "Id", "Nombre"))" required="required">
+        <option selected="selected" value="">-- Seleccionar País --</option>
+    </select>
+    <p></p>
+    <label>Descripcion de sus patas</label>
+    <br />
+    <input required asp-for="Razas.Caracteristicasfisicas.Patas" />
+    <br />
+    <label>Descripcion de su cola</label>
+    <br />
+    <input required asp-for="Razas.Caracteristicasfisicas.Cola" />
+    <br />
+    <label>Descripcion de su hocico </label>
+    <br />
+    <input required asp-for="Razas.Caracteristicasfisicas.Hocico" />
+    <br />
+    <label>Descripcion de su pelo</label>
+    <br />
+    <input required asp-for="Razas.Caracteristicasfisicas.Pelo" />
+    <br />
+    <label> Descripcion de su color </label>
+    <br />
+    <input required asp-for="Razas.Caracteristicasfisicas.Color" />
+    <br />
+    <label>Energia </label>
+    <br />
+    <input step="1" required asp-for="Razas.Estadisticasraza.NivelEnergia" />
+    <br />
+    <label>Facilidad de entrenar</label>
+    <br />
+    <input step="1" required asp-for="Razas.Estadisticasraza.FacilidadEntrenamiento" />
+    <br />
+    <label>Ejercicio obligatorio </label>
+    <br />
+    <input step="1" required asp-for="Razas.Estadisticasraza.EjercicioObligatorio" />
+    <br />
+    <label>Amistad con desconocidos</label>
+    <br />
+    <input step="1" required asp-for="Razas.Estadisticasraza.AmistadDesconocidos" />
+    <br />
+    <label>Amistad con otros perros</label>
+    <br />
+    <input step="1" required asp-for="Razas.Estadisticasraza.AmistadPerros" />
+    <br />
+    <label>Necesidad de cepillado </label>
+    <br />
+    <input step="1" required asp-for="Razas.Estadisticasraza.NecesidadCepillado" />
+    <br />
+    <label>Imagen:</label>
+    <input required type="file" id="fileUpload1" accept="image/jpg" asp-for="Archivo" onchange="mostrarImagen(this)" />
+
+    <img id="imagePreview" src="~/imgs_perros/NoPhoto.jpg" alt="Vista previa de la imagen" />
+
+    <p class="error">@Html.ValidationSummary()</p>
+    <input type="submit" value="Agregar" />
+    <a href="~/Admin">
+        <input type="button" value="Cancelar" />
+    </a>
+</form>
+<script>
+    function mostrarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("imagePreview").src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
